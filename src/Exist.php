@@ -31,7 +31,7 @@ final class Exist implements
     public function __construct(
         private ?string $tableName = null,
         private ?string $attribute = null,
-        private ?string $message = null,
+        private string $message = '{attribute} is invalid.',
         private string $handlerClassName = ExistHandler::class,
         bool|callable|null $skipOnEmpty = null,
         private bool $skipOnError = false,
@@ -50,7 +50,7 @@ final class Exist implements
         return $this->attribute;
     }
 
-    public function getMessage(): ?string
+    public function getMessage(): string
     {
         return $this->message;
     }
@@ -68,6 +68,10 @@ final class Exist implements
     public function getOptions(): array
     {
         return [
+            'message' => [
+                'template' => $this->message,
+                'parameters' => [],
+            ],
             'skipOnEmpty' => $this->getSkipOnEmptyOption(),
             'skipOnError' => $this->skipOnError,
         ];

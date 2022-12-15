@@ -14,7 +14,6 @@ final class ExistHandler implements RuleHandlerInterface
 {
     public function __construct(
         private QueryInterface $query,
-        private string $message = '{attribute} is invalid.',
     ) {
     }
 
@@ -33,7 +32,7 @@ final class ExistHandler implements RuleHandlerInterface
 
         if (!$exist) {
             $result->addError(
-                $rule->getMessage() ?? $this->message,
+                $rule->getMessage(),
                 [
                     'attribute' => $context->getTranslatedAttribute(),
                 ]
